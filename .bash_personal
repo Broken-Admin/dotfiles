@@ -1,0 +1,21 @@
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+if [ -n "$PS1" ]; then
+    if [ -z "$TMUX" ]; then
+        tmux_sess=$(tmux ls 2>/dev/null | wc -l)
+        if [ $tmux_sess -gt 0 ]; then
+            if [ $tmux_sess -gt 1 ]; then
+                echo "$tmux_sess tmux sessions active."
+            else
+                echo "$tmux_sess tmux session active."
+            fi
+        fi
+    fi
+fi
+
+
